@@ -25,6 +25,11 @@ function wpaibp_handle_record( $user_id, $data, $import_options ) {
 	foreach ( $data as $key => $value ) {
 		$field_id = intval( substr( $key, 12 ) ); // bp_xprofile_
 
+		$maybe_decode = json_decode( $value );
+		if ( null !== $maybe_decode ) {
+			$value = $maybe_decode;
+		}
+
 		xprofile_set_field_data( $field_id, $user_id, $value );
 	}
 }

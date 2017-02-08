@@ -48,6 +48,11 @@ function bbg_export_csv_rows( $articles, $options ) {
 		foreach ( $articles as &$article ) {
 			$value = xprofile_get_field_data( $field_id, $article['id'] );
 			$field_name = $options['cc_name'][ $field_key ];
+
+			if ( is_array( $value ) ) {
+				$value = json_encode( $value );
+			}
+
 			$article[ $field_name ] = $value;
 		}
 	}
